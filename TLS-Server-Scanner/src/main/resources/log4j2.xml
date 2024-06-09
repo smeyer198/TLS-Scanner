@@ -12,6 +12,7 @@
         </Console>
     </Appenders>
     <Loggers>
+        <Logger name="de.upb.cs" level="OFF"/>
         <Logger name="de.rub.nds.tlsattacker" level="ERROR" additivity="false">
             <AppenderRef ref="Direct"/>
         </Logger>

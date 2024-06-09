@@ -131,7 +131,7 @@ public class ServerReportPrinter extends ReportPrinter<ServerReport> {
         }
         appendProtocolVersions(builder);
         appendCipherSuites(builder);
-        appendExtensions(builder);
+        /*appendExtensions(builder);
         appendCompressions(builder);
         appendEcPointFormats(builder);
         appendRecordFragmentation(builder);
@@ -166,9 +166,241 @@ public class ServerReportPrinter extends ReportPrinter<ServerReport> {
             appendGuidelines(builder);
         }
         appendPerformanceData(builder);
-        appendMissingProbesRequirements(builder);
+        appendMissingProbesRequirements(builder);*/
+        appendDtlsOverlappingFragmentResults(builder);
 
         return builder.toString();
+    }
+
+    private void appendDtlsOverlappingFragmentResults(StringBuilder builder) {
+        prettyAppendHeading(builder, "Overlapping Fragments");
+        prettyAppend(
+                builder,
+                "Supports DTLS Cookie Exchange",
+                TlsAnalyzedProperty.SUPPORTS_DTLS_COOKIE_EXCHANGE);
+        prettyAppend(
+                builder,
+                "Requires Client Authentication",
+                TlsAnalyzedProperty.REQUIRES_CLIENT_AUTHENTICATION);
+
+        prettyAppend(
+                builder,
+                "Accepts ClientHello Consecutive  Fragments",
+                TlsAnalyzedProperty.ACCEPTS_CLIENT_HELLO_CONSECUTIVE_FRAGMENTS);
+        prettyAppend(
+                builder,
+                "Accepts ClientHello Subsequent Fragments",
+                TlsAnalyzedProperty.ACCEPTS_CLIENT_HELLO_SUBSEQUENT_FRAGMENTS);
+        prettyAppend(
+                builder,
+                "Accepts ClientHello Subsequent Fragments",
+                TlsAnalyzedProperty.ACCEPTS_CLIENT_HELLO_EXTENDED_SUBSEQUENT_FRAGMENTS);
+
+        prettyAppend(
+                builder,
+                "Accepts ClientKeyExchange Consecutive  Fragments",
+                TlsAnalyzedProperty.ACCEPTS_CLIENT_KEY_EXCHANGE_CONSECUTIVE_FRAGMENTS);
+        prettyAppend(
+                builder,
+                "Accepts ClientKeyExchange Subsequent  Fragments",
+                TlsAnalyzedProperty.ACCEPTS_CLIENT_KEY_EXCHANGE_SUBSEQUENT_FRAGMENTS);
+        prettyAppend(
+                builder,
+                "Accepts ClientKeyExchange Extended Subsequent  Fragments",
+                TlsAnalyzedProperty.ACCEPTS_CLIENT_KEY_EXCHANGE_EXTENDED_SUBSEQUENT_FRAGMENTS);
+
+        // Version
+        prettyAppend(
+                builder,
+                "Consecutive Version Type A Original Order",
+                TlsAnalyzedProperty.CONSECUTIVE_VERSION_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Consecutive Version Type A Reversed Order",
+                TlsAnalyzedProperty.CONSECUTIVE_VERSION_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Consecutive Version Type B Original Order",
+                TlsAnalyzedProperty.CONSECUTIVE_VERSION_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Consecutive Version Type B Reversed Order",
+                TlsAnalyzedProperty.CONSECUTIVE_VERSION_TYPE_B_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Subsequent Version Type A Original Order",
+                TlsAnalyzedProperty.SUBSEQUENT_VERSION_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Subsequent Version Type A Reversed Order",
+                TlsAnalyzedProperty.SUBSEQUENT_VERSION_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Subsequent Version Type B Original Order",
+                TlsAnalyzedProperty.SUBSEQUENT_VERSION_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Subsequent Version Type B Reversed Order",
+                TlsAnalyzedProperty.SUBSEQUENT_VERSION_TYPE_B_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Extended Subsequent Version Type A Original Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_VERSION_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Extended Subsequent Version Type A Reversed Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_VERSION_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Extended Subsequent Version Type B Original Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_VERSION_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Extended Subsequent Version Type B Reversed Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_VERSION_TYPE_B_REVERSED_ORDER);
+
+        // CipherSuites
+        prettyAppend(
+                builder,
+                "Consecutive Cipher Suite Type A Original Order",
+                TlsAnalyzedProperty.CONSECUTIVE_CIPHER_SUITES_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Consecutive Cipher Suite Type A Reversed Order",
+                TlsAnalyzedProperty.CONSECUTIVE_CIPHER_SUITES_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Consecutive Cipher Suite Type B Original Order",
+                TlsAnalyzedProperty.CONSECUTIVE_CIPHER_SUITES_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Consecutive Cipher Suite Type B Reversed Order",
+                TlsAnalyzedProperty.CONSECUTIVE_CIPHER_SUITES_TYPE_B_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Subsequent Cipher Suite Type A Original Order",
+                TlsAnalyzedProperty.SUBSEQUENT_CIPHER_SUITES_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Subsequent Cipher Suite Type A Reversed Order",
+                TlsAnalyzedProperty.SUBSEQUENT_CIPHER_SUITES_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Subsequent Cipher Suite Type B Original Order",
+                TlsAnalyzedProperty.SUBSEQUENT_CIPHER_SUITES_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Subsequent Cipher Suite Type B Reversed Order",
+                TlsAnalyzedProperty.SUBSEQUENT_CIPHER_SUITES_TYPE_B_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Extended Subsequent Cipher Suite Type A Original Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_CIPHER_SUITES_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Extended Subsequent Cipher Suite Type A Reversed Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_CIPHER_SUITES_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Extended Subsequent Cipher Suite Type B Original Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_CIPHER_SUITES_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Extended Subsequent Cipher Suite Type B Reversed Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_CIPHER_SUITES_TYPE_B_REVERSED_ORDER);
+
+        // SignatureAndHashAlgorithms
+        prettyAppend(
+                builder,
+                "Consecutive SigAndHash Type A Original Order",
+                TlsAnalyzedProperty.CONSECUTIVE_SIG_AND_HASH_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Consecutive SigAndHash Type A Reversed Order",
+                TlsAnalyzedProperty.CONSECUTIVE_SIG_AND_HASH_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Consecutive SigAndHash Type B Original Order",
+                TlsAnalyzedProperty.CONSECUTIVE_SIG_AND_HASH_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Consecutive SigAndHash Type B Reversed Order",
+                TlsAnalyzedProperty.CONSECUTIVE_SIG_AND_HASH_TYPE_B_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Subsequent SigAndHash Type A Original Order",
+                TlsAnalyzedProperty.SUBSEQUENT_SIG_AND_HASH_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Subsequent SigAndHash Type A Reversed Order",
+                TlsAnalyzedProperty.SUBSEQUENT_SIG_AND_HASH_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Subsequent SigAndHash Type B Original Order",
+                TlsAnalyzedProperty.SUBSEQUENT_SIG_AND_HASH_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Subsequent SigAndHash Type B Reversed Order",
+                TlsAnalyzedProperty.SUBSEQUENT_SIG_AND_HASH_TYPE_B_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Extended Subsequent SigAndHash Type A Original Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_SIG_AND_HASH_TYPE_A_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Extended Subsequent SigAndHash Type A Reversed Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_SIG_AND_HASH_TYPE_A_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "Extended Subsequent SigAndHash Type B Original Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_SIG_AND_HASH_TYPE_B_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "Extended Subsequent SigAndHash Type B Reversed Order",
+                TlsAnalyzedProperty.EXTENDED_SUBSEQUENT_SIG_AND_HASH_TYPE_B_REVERSED_ORDER);
+
+        // ClientKeyExchange
+        prettyAppend(
+                builder,
+                "RSA ClientKeyExchange Original Order",
+                TlsAnalyzedProperty.RSA_CLIENT_KEY_EXCHANGE_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "RSA ClientKeyExchange Reversed Order",
+                TlsAnalyzedProperty.RSA_CLIENT_KEY_EXCHANGE_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "DH ClientKeyExchange Original Order",
+                TlsAnalyzedProperty.DH_CLIENT_KEY_EXCHANGE_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "DH ClientKeyExchange Reversed Order",
+                TlsAnalyzedProperty.DH_CLIENT_KEY_EXCHANGE_REVERSED_ORDER);
+
+        prettyAppend(
+                builder,
+                "ECDH ClientKeyExchange Original Order",
+                TlsAnalyzedProperty.ECDH_CLIENT_KEY_EXCHANGE_ORIGINAL_ORDER);
+        prettyAppend(
+                builder,
+                "ECDH ClientKeyExchange Reversed Order",
+                TlsAnalyzedProperty.ECDH_CLIENT_KEY_EXCHANGE_REVERSED_ORDER);
     }
 
     private void appendMissingProbesRequirements(StringBuilder builder) {

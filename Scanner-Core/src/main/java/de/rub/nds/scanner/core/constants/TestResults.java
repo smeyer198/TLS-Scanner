@@ -29,7 +29,8 @@ public enum TestResults implements TestResult {
     UNSUPPORTED,
     NOT_TESTED_YET,
     UNASSIGNED_ERROR,
-    TIMEOUT;
+    TIMEOUT,
+    NOT_SUPPORTED;
 
     private TestResults() {}
 

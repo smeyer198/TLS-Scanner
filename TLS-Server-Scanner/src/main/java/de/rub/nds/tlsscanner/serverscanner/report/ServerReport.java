@@ -16,6 +16,7 @@ import de.rub.nds.scanner.core.constants.TestResults;
 import de.rub.nds.scanner.core.report.rating.ScoreReport;
 import de.rub.nds.tlsattacker.core.certificate.transparency.SignedCertificateTimestampList;
 import de.rub.nds.tlsattacker.core.constants.NamedGroup;
+import de.rub.nds.tlsattacker.core.constants.SignatureAndHashAlgorithm;
 import de.rub.nds.tlsscanner.core.constants.TlsAnalyzedProperty;
 import de.rub.nds.tlsscanner.core.report.DefaultPrintingScheme;
 import de.rub.nds.tlsscanner.core.report.TlsScanReport;
@@ -33,6 +34,7 @@ import de.rub.nds.tlsscanner.serverscanner.probe.result.cca.CcaTestResult;
 import de.rub.nds.tlsscanner.serverscanner.probe.result.hpkp.HpkpPin;
 import de.rub.nds.tlsscanner.serverscanner.probe.result.ocsp.OcspCertificateResult;
 import de.rub.nds.tlsscanner.serverscanner.probe.result.raccoonattack.RaccoonAttackProbabilities;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -75,7 +77,13 @@ public class ServerReport extends TlsScanReport<ServerReport> {
     private Integer hpkpMaxAge = null; //
 
     // DTLS
+    private Boolean cookieExchange = true;
     private Integer cookieLength = null;
+
+    // Client Authentication
+    private Boolean clientAuthentication = false;
+
+    private SignatureAndHashAlgorithm signatureAndHashAlgorithmCertificate;
 
     // PublicKey Params
     private Integer weakestDhStrength = null;
@@ -162,12 +170,37 @@ public class ServerReport extends TlsScanReport<ServerReport> {
         this.isHandshaking = isHandshaking;
     }
 
+    public synchronized Boolean getCookieExchange() {
+        return cookieExchange;
+    }
+
+    public synchronized void setCookieExchange(Boolean cookieExchange) {
+        this.cookieExchange = cookieExchange;
+    }
+
     public synchronized Integer getCookieLength() {
         return cookieLength;
     }
 
     public synchronized void setCookieLength(Integer cookieLength) {
         this.cookieLength = cookieLength;
+    }
+
+    public synchronized Boolean getClientAuthentication() {
+        return clientAuthentication;
+    }
+
+    public synchronized void setClientAuthentication(Boolean clientAuthentication) {
+        this.clientAuthentication = clientAuthentication;
+    }
+
+    public synchronized SignatureAndHashAlgorithm getSignatureAndHashAlgorithmCertificate() {
+        return signatureAndHashAlgorithmCertificate;
+    }
+
+    public synchronized void setSignatureAndHashAlgorithmCertificate(
+            SignatureAndHashAlgorithm signatureAndHashAlgorithmCertificate) {
+        this.signatureAndHashAlgorithmCertificate = signatureAndHashAlgorithmCertificate;
     }
 
     public synchronized GcmPattern getGcmPattern() {
@@ -280,11 +313,13 @@ public class ServerReport extends TlsScanReport<ServerReport> {
     }
 
     public synchronized List<OcspCertificateResult> getOcspResults() {
-        @SuppressWarnings("unchecked")
-        ListResult<OcspCertificateResult> listResult =
+        // @SuppressWarnings("unchecked")
+        /*ListResult<OcspCertificateResult> listResult =
                 (ListResult<OcspCertificateResult>)
                         this.getResult(TlsAnalyzedProperty.OCSP_RESULTS);
-        return listResult == null ? null : listResult.getList();
+        return listResult == null ? null : listResult.getList();*
+         */
+        return Collections.emptyList();
     }
 
     public synchronized List<InformationLeakTest<DirectRaccoonOracleTestInfo>>

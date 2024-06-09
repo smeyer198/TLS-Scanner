@@ -22,6 +22,7 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.CertificateParsingException;
@@ -232,6 +233,7 @@ public class TrustAnchorManager {
                                 + "/"
                                 + entry.getFingerprint(),
                         ex);
+            } catch (NoSuchProviderException e) {
             }
         }
         return certificateSet;
@@ -244,6 +246,7 @@ public class TrustAnchorManager {
                 certX509List.add(PemUtil.readCertificate(new File(filepath)));
             } catch (CertificateException | IOException ex) {
                 LOGGER.error("Could't load the CA: " + filepath, ex);
+            } catch (NoSuchProviderException e) {
             }
         }
         return certX509List;
